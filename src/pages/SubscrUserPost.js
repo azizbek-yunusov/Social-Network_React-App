@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "../App";
-import moment from "moment";
-const Home = () => {
+import moment from 'moment';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { UserContext } from '../App';
+
+const SubscrUserPost = () => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
-    fetch("http://localhost:5000/allpost", {
+    fetch("http://localhost:5000/getsubspost", {
       headers: {
         Authorization: "Aziz " + localStorage.getItem("jwt"),
       },
@@ -108,7 +109,6 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   };
-  // console.log(data);
   return (
     <div className="home">
       <div className="post__items">
@@ -243,7 +243,7 @@ const Home = () => {
                         <form
                           onSubmit={(e) => {
                             e.preventDefault();
-                            commentPost(e.target[0].value, item._id);
+                            // commentPost(e.target[0].value, item._id);
                           }}
                         >
                           <input type="text" placeholder="Add a comment" />
@@ -264,7 +264,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default SubscrUserPost

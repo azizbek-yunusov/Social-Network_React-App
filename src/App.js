@@ -9,8 +9,11 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import CreatePost from "./pages/CreatePost";
 import { reducer, initialState } from "./reducers/useReducer";
+import UserProfile from "./pages/UserProfile";
+import SubscrUserPost from "./pages/SubscrUserPost";
 
 export const UserContext = createContext();
+
 const Routing = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(UserContext);
@@ -18,12 +21,10 @@ const Routing = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       dispatch({ type: "USER", payload: user });
-      navigate("/");
     } else {
       navigate("/signin");
     }
   }, []);
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -31,6 +32,8 @@ const Routing = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/createpost" element={<CreatePost />} />
+      <Route path="/user/:userId" element={<UserProfile />} />
+      <Route path="/myfollowerpost" element={<SubscrUserPost />} />
     </Routes>
   );
 };
